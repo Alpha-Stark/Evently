@@ -17,8 +17,8 @@ export const connectToDatabase = async () => {
     cached.promise = cached.promise || mongoose.connect(MONGODB_URI, {
         dbName: "evently",
         bufferCommands: false
-    })
+    }) //as this .connect return a promise, we store it in cached.promise.
 
-    cached.conn = await cached.promise;
+    cached.conn = await cached.promise; // That promised is then awaited to get the main connection, because we want the cached.conn to be a final fetched things, then we awaited the promise to get connection.  //just like respose.json()
     return cached.conn;
 };
