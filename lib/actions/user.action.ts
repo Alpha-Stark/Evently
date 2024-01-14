@@ -9,7 +9,7 @@ import Order from "../database/models/order.model"
 import Event from "../database/models/event.model"
 
 export const createUser = async (user: CreateUserParams) => {
-    //** refer docs on serverless function
+    //** refer docs on serverless function (https://vercel.com/docs/functions/serverless-functions)
     try {
         await connectToDatabase(); //cached connection.
         const newUser = await User.create(user)
@@ -60,10 +60,12 @@ export async function deleteUser(clerkId: string) {
         // Unlink relationships
         await Promise.all([
             // Update the 'events' collection to remove references to the user
-            Event.updateMany(
-                { _id: { $in: userToDelete.events } },
-                { $pull: { organizer: userToDelete._id } }
-            ),
+            Event.updateMany({ _id: { $in: userToDelete.events } }, { $pull: { organizer: userToDelete._id } }),
+            /** Accroach to understand such query is to move from in to out. (or in some sense, right to left).
+             * [below comments is i think wrong, so ignore]
+             * So for us(finding condition), understand like, It targets documents[events] where the _id field is in the array userToDelete.events.
+             * And now the update operation: is to pull out[remove] all the userToDelete._id which are in the organizer's object of selected events. [Something like this]. Do this in the found documents[through finding condition].
+            */
 
             // Update the 'orders' collection to remove references to the user
             Order.updateMany({ _id: { $in: userToDelete.orders } }, { $unset: { buyer: 1 } }),
