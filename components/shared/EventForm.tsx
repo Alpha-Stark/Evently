@@ -1,7 +1,7 @@
 "use client"
 // used shadcn form, input, textarea, 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
+import { FieldArray, useForm } from "react-hook-form"
 import { z } from "zod"
 
 import { Button } from "@/components/ui/button"
@@ -13,6 +13,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { eventFormSchema } from "@/lib/validator"
 import { eventDefaultValues } from "@/constants"
 import Dropdown from "./Dropdown"
+import { FileUploader } from "./FileUploader"
+import { useState } from "react"
 
 type EventFromProps = {
     userId: string;
@@ -22,6 +24,7 @@ type EventFromProps = {
 const EventForm = ({ userId, type }: EventFromProps) => {
 
     const initialValues = eventDefaultValues;
+    const [files, setFiles] = useState<File[]>([])
 
     // 1. Define your form.
     const form = useForm<z.infer<typeof eventFormSchema>>({
@@ -88,7 +91,7 @@ const EventForm = ({ userId, type }: EventFromProps) => {
                         render={({ field }) => (
                             <FormItem className="w-full">
                                 <FormControl className="h-72">
-                                    <Textarea placeholder="Description" {...field} className="textarea rounded-2xl" />
+                                    <FileUploader onFieldChange={field.onChange} imageUrl={field.value} setFiles={setFiles} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
