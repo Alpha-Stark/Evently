@@ -216,7 +216,12 @@ const EventForm = ({ userId, type }: EventFromProps) => {
                                                     <FormControl>
                                                         <div className="flex items-center">
                                                             <label htmlFor="isFree" className="whitespace-nowrap pr-3 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Free Ticket</label>
-                                                            <Checkbox id="isFree" className="mr-2 h-5 w-5 border-2 border-primary-500" />
+                                                            <Checkbox
+                                                                id="isFree"
+                                                                className="mr-2 h-5 w-5 border-2 border-primary-500"
+                                                                onCheckedChange={field.onChange}
+                                                                checked={field.value}
+                                                            />
                                                         </div>
                                                     </FormControl>
                                                     <FormMessage />
