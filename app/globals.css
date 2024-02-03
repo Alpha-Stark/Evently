@@ -254,20 +254,23 @@ body {
 }
 
 /* ========================================== REACT-DATEPICKER STYLES */
-/* Adjust class names based on inspection */
-.datePicker .react-datetime-picker__input {
+.datePicker {
+  width: 100%;
+}
+
+.react-datepicker__input-container input {
   background-color: transparent;
   width: 100%;
   outline: none;
   margin-left: 16px;
 }
 
-.datePicker .react-datetime-picker__day--selected {
+.react-datepicker__day--selected {
   background-color: #624cf5 !important;
   color: #ffffff !important;
   border-radius: 4px;
 }
 
-.datePicker .react-datetime-picker__time-list-item--selected {
+.react-datepicker__time-list-item--selected {
   background-color: #624cf5 !important;
 }
