@@ -23,6 +23,7 @@ import { useUploadThing } from "@/lib/uploadthing"
 import { eventFormSchema } from "@/lib/validator"
 import { eventDefaultValues } from "@/constants"
 import { useRouter } from "next/navigation"
+import { createEvent } from "@/lib/actions/event.action"
 
 type EventFromProps = {
     userId: string;
