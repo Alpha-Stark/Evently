@@ -1,6 +1,8 @@
 "use client"
 // used shadcn form, input, textarea, 
 // Date picker component from (https://www.npmjs.com/package/react-datepicker), there are many different such types, so be cautious
+import { useState } from "react"
+import Image from "next/image"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { FieldArray, useForm } from "react-hook-form"
 import { z } from "zod"
@@ -10,16 +12,17 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
+import Dropdown from "./Dropdown"
+import { FileUploader } from "./FileUploader"
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+import { useUploadThing } from "@/lib/uploadthing"
+
 import { eventFormSchema } from "@/lib/validator"
 import { eventDefaultValues } from "@/constants"
-import Dropdown from "./Dropdown"
-import { FileUploader } from "./FileUploader"
-import { useState } from "react"
-import Image from "next/image"
+import { useRouter } from "next/navigation"
 
 type EventFromProps = {
     userId: string;
@@ -32,7 +35,9 @@ const EventForm = ({ userId, type }: EventFromProps) => {
     const initialValues = eventDefaultValues; //move it down if any error
     const [files, setFiles] = useState<File[]>([])
 
+    const { startUpload } = useUploadThing('imageUploader') //And this comes from 'Upload Thing' so we have to properly import it specifically/manually
 
+    const router = useRouter(); //This useRouter() must be from "next/navigation". And not "next/router"
 
     // 1. Define your form.
     const form = useForm<z.infer<typeof eventFormSchema>>({
@@ -41,10 +46,37 @@ const EventForm = ({ userId, type }: EventFromProps) => {
     })
 
     // 2. Define a submit handler.
-    function onSubmit(values: z.infer<typeof eventFormSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log(values)
+    async function onSubmit(values: z.infer<typeof eventFormSchema>) {
+
+        let uploadedImageUrl = values.imageUrl;
+
+        if (files.length > 0) {
+            const uploadedImages = await startUpload(files); // And this startUpload() has to be defined above that where does it come from (i.e., upload thing).
+
+            if (!uploadedImages) {
+                return;
+            }
+
+            uploadedImageUrl = uploadedImages[0].url;
+        }
+
+        if (type === 'Create') {
+            try {
+                const newEvent = await createEvent({
+                    event: { ...values, imageUrl: uploadedImageUrl },
+                    userId,
+                    path: "/profile"
+                });
+
+                if (newEvent) {
+                    form.reset();
+                    router.push(`/events/${newEvent._id}`);
+                }
+
+            } catch (error) {
+                console.log(error)
+            }
+        }
     }
 
     return (
