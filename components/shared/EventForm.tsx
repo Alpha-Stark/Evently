@@ -188,6 +188,7 @@ const EventForm = ({ userId, type }: EventFromProps) => {
                                             wrapperClassName="datePicker"
                                         />
                                     </div>
+
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -218,6 +219,7 @@ const EventForm = ({ userId, type }: EventFromProps) => {
                                             wrapperClassName="datePicker"
                                         />
                                     </div>
+
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

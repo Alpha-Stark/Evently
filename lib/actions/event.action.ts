@@ -41,7 +41,6 @@ export const getEventById = async (eventId: string) => {
 
         // const event = await Event.findById(eventId);
         const event = await populateEvent(Event.findById(eventId));
-
         if (!event) {
             throw new Error("Event not found")
         }

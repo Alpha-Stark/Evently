@@ -9,8 +9,8 @@ export interface IEvent extends Document {
     location?: string;
     createdAt?: Date;
     imageUrl: string;
-    startDataTime?: Date;
-    endDataTime?: Date;
+    startDateTime?: Date;
+    endDateTime?: Date;
     price?: string;
     isFree?: boolean;
     url?: string;
@@ -25,16 +25,17 @@ const EventSchema = new Schema({
     location: { type: String },
     createdAt: { type: Date, default: Date.now },
     imageUrl: { type: String, required: true },
-    startDataTime: { type: Date, default: Date.now },
-    endDataTime: { type: Date, default: Date.now },
+    startDateTime: { type: Date, default: Date.now },
+    endDateTime: { type: Date, default: Date.now },
     price: { type: String },
     isFree: { type: Boolean, default: false },
     url: { type: String },
     category: { type: Schema.Types.ObjectId, ref: "Category" },
     organizer: { type: Schema.Types.ObjectId, ref: "User" },
-
 })
 
 const Event = models.Event || model("Event", EventSchema)
 
 export default Event;
+
+//*** Always remember that, if we later on change the schema's content, we have to restart the server.
