@@ -63,6 +63,8 @@ const EventDetails = async ({ params: { id } }: SearchParamProps) => {
                 </div>
             </div>
         </section>
+        // Related Events category
+
     )
 }
 
