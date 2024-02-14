@@ -54,10 +54,13 @@ export const getAllEvents = async ({ query, limit = 6, page, category }: GetAllE
         await connectToDatabase()
 
         const conditions = {};
-        const eventsQuery = await Event.find(conditions)
+        // Understand why there is no awit in the below statement
+        const eventsQuery = Event.find(conditions)
             .sort({ createdAt: "desc" })
             .skip(0)
             .limit(limit)
+        // Event.find() method in Mongoose returns a Query object, not a promise. Therefore, you don't need to use await in this specific context. if we want to use await keyword, then we had to add .exec() method at the end, which returns promise.
+
         const events = await populateEvent(eventsQuery);
         // We need total no of events received, as from it we can implement pagination.
         const eventsCount = await Event.countDocuments(conditions);
