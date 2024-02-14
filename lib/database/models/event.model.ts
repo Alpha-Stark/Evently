@@ -7,15 +7,15 @@ export interface IEvent extends Document {
     title: string;
     description?: string;
     location?: string;
-    createdAt?: Date;
+    createdAt: Date;
     imageUrl: string;
-    startDateTime?: Date;
-    endDateTime?: Date;
-    price?: string;
-    isFree?: boolean;
+    startDateTime: Date;
+    endDateTime: Date;
+    price: string;
+    isFree: boolean;
     url?: string;
-    category?: { _id: string, name: string };
-    organizer?: { _id: string, firstName: string, lastName: string };
+    category: { _id: string, name: string };
+    organizer: { _id: string, firstName: string, lastName: string };
     // we filled up by using chatGPT, and then look as if we ain't missing anything. Add added _id and modified category and organizer properties, in here.
 }
 

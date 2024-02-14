@@ -6,13 +6,14 @@ import Link from "next/link";
 
 
 export default async function Home() {
+
   const events = await getAllEvents({
     query: "",
     category: "",
     page: 1,
     limit: 6
   })
-  console.log(events);
+  // console.log(events);
 
   return (
     <>
@@ -43,7 +44,7 @@ export default async function Home() {
         </div>
 
         <Collection
-          data={[]}
+          data={events?.data}
           emptyTitle="No Events Found"
           emptyStateSubtext="Come back later"
           collectionType="All_Events"
