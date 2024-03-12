@@ -28,7 +28,6 @@ const Dropdown = ({ value, onChangeHandler }: DropdownProps) => {
         const getCategories = async () => {
             const categoryList = await getAllCategories()
             categoryList && setCategories(categoryList as ICategory[]) //If there is a list then, set it to the state of categories
-
         }
         getCategories()
     }, [])
