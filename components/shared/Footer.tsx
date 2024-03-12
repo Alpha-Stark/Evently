@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-
+import { FaHeart, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
 const Footer = () => {
   return (
@@ -14,7 +14,8 @@ const Footer = () => {
             height={38}
           />
         </Link>
-        <p>2023 Evently. All Rights reserved.</p>
+
+        <p style={{ display: 'flex', alignItems: 'center' }}>Made with <FaHeart style={{ color: 'red', fontSize: '24px', marginRight: '6px', marginLeft: '6px' }} />by Mann Savani. All Rights reserved.</p>
       </div>
     </footer>
   )
