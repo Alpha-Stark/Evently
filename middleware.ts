@@ -1,5 +1,5 @@
-import { authMiddleware } from "@clerk/nextjs";
- 
+import { authMiddleware } from "@clerk/nextjs"; //if this stops working, do "@clerk/nextjs/server"
+
 export default authMiddleware({
     publicRoutes: [
         "/",
@@ -14,7 +14,7 @@ export default authMiddleware({
         "/api/uploadthing",
     ]
 });
- 
+
 export const config = {
-  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
+    matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 };
