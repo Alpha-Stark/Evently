@@ -15,8 +15,8 @@ const Footer = () => {
           />
         </Link>
 
-        {/* <p style={{ display: 'flex', alignItems: 'center' }}>Made with <FaHeart style={{ color: 'red', fontSize: '24px', marginRight: '6px', marginLeft: '6px' }} />by Mann Savani. All Rights reserved.</p> */}
-        <p>2024 Evently. All Rights reserved.</p>
+        <p style={{ display: 'flex', alignItems: 'center' }}>Made with <FaHeart style={{ color: 'red', fontSize: '24px', marginRight: '6px', marginLeft: '6px' }} />by Mann, Hardi and Dhruvil. All Rights reserved.</p>
+        {/* <p>2024 Evently. All Rights reserved.</p> */}
       </div>
     </footer>
   )
